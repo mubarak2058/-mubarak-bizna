@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mubarak Enterprise POS</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+.header{
+background:#0b7a0b;
+color:white;
+padding:15px;
+text-align:center;
+}
+
+.container{
+max-width:1200px;
+margin:20px auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+margin-bottom:20px;
+}
+
+h2{
+color:#0b7a0b;
+margin-bottom:15px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ddd;
+border-radius:5px;
+}
+
+button{
+background:#0b7a0b;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#086108;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+table th,
+table td{
+padding:12px;
+border:1px solid #ddd;
+text-align:left;
+}
+
+table th{
+background:#0b7a0b;
+color:white;
+}
+
+.total{
+font-size:24px;
+font-weight:bold;
+color:#0b7a0b;
+margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>Mubarak Enterprise POS</h1>
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Add Sale</h2>
+
+<input type="text" id="product" placeholder="Product Name">
+
+<input type="number" id="quantity" placeholder="Quantity">
+
+<input type="number" id="price" placeholder="Price">
+
+<button onclick="addSale()">Add Sale</button>
+
+</div>
+
+<div class="card">
+
+<h2>Sales List</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Product</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Total</th>
+</tr>
+</thead>
+
+<tbody id="salesTable">
+</tbody>
+
+</table>
+
+<div class="total">
+Grand Total: KES <span id="grandTotal">0</span>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let grandTotal = 0;
+
+function addSale(){
+
+let product =
+document.getElementById("product").value;
+
+let quantity =
+parseFloat(document.getElementById("quantity").value);
+
+let price =
+parseFloat(document.getElementById("price").value);
+
+if(product==="" || isNaN(quantity) || isNaN(price)){
+alert("Fill all fields");
+return;
+}
+
+let total = quantity * price;
+
+grandTotal += total;
+
+document.getElementById("salesTable").innerHTML += `
+<tr>
+<td>${product}</td>
+<td>${quantity}</td>
+<td>${price}</td>
+<td>${total}</td>
+</tr>
+`;
+
+document.getElementById("grandTotal").innerText =
+grandTotal;
+
+document.getElementById("product").value="";
+document.getElementById("quantity").value="";
+document.getElementById("price").value="";
+}
+
+</script>
+
+</body>
+  </html>
